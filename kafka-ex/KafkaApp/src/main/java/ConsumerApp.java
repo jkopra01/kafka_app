@@ -22,7 +22,7 @@ public class ConsumerApp {
 
 
     public void readMessages() {
-        consumer.subscribe(Collections.singleton("Topic10"));
+        consumer.subscribe(Collections.singleton("Topic1"));
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000).toMillis());
             for (ConsumerRecord<String, String> record : records) {

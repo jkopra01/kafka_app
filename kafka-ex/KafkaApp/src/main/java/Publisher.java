@@ -1,8 +1,11 @@
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
+
+import java.util.List;
 import java.util.Properties;
 
 
@@ -18,10 +21,11 @@ public class Publisher {
         this.producer = producer;
     }
 
-    public void sendMessages() {
-        String recordValue = "Does this work?";
-        ProducerRecord<String, String> record = new ProducerRecord<>("Topic10", null, recordValue);
-        producer.send(record);
-        producer.flush();
+
+    public void sendMessages(List<ProducerRecord> messages) {
+        for (ProducerRecord<String, String> message : messages) {
+            producer.send(message);
+            producer.flush();
+        }
     }
 }
